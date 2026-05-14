@@ -1,4 +1,8 @@
 HELP.md
+.env
+dev_run.sh
+dev_verify.sh
+LearnAbout.txt
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
