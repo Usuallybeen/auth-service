@@ -21,15 +21,15 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody @Valid AuthRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-            AuthResponse.builder().token(aService.register(request)).build()
-        );
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(AuthResponse.builder().token(aService.register(request)).build());
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody @Valid AuthRequest request) {
-        return ResponseEntity.status(HttpStatus.OK).body(
-            AuthResponse.builder().token(aService.authenticate(request)).build()
-        );
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(AuthResponse.builder().token(aService.authenticate(request)).build());
     }
 }
