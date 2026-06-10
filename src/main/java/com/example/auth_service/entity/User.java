@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -17,18 +18,28 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(
+    name = "users",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "uq_users_username",
+            columnNames = {"username"}
+        )
+    }
+)
 public class User implements UserDetails {
+
+    public static final String USERNAME_CONSTRAINT = "uq_users_username";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
